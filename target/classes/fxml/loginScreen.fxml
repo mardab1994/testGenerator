@@ -23,12 +23,13 @@
             <Font name="Buxton Sketch" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="indeksInput" layoutX="75.0" layoutY="360.0" prefHeight="25.0" prefWidth="250.0" style="-fx-border-color: #648FA7; -fx-background-color: #1D2030;" text="Indeks" />
-      <TextField fx:id="idTestInput" layoutX="76.0" layoutY="401.0" prefHeight="25.0" prefWidth="250.0" style="-fx-border-color: #13BEEB; -fx-background-color: #1D2030;" text="Id testu" />
+      <TextField fx:id="indeksInput" layoutX="76.0" layoutY="332.0" prefHeight="25.0" prefWidth="250.0" style="-fx-border-color: #648FA7; -fx-background-color: #1D2030;" text="Indeks" />
+      <TextField fx:id="idTestInput" layoutX="76.0" layoutY="374.0" prefHeight="25.0" prefWidth="250.0" style="-fx-border-color: #13BEEB; -fx-background-color: #1D2030;" text="Id testu" />
       <Button layoutX="75.0" layoutY="455.0" mnemonicParsing="false" onAction="#login2app" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #13BEEB;" text="Zaloguj" textFill="WHITE">
          <font>
             <Font name="Courier New" size="14.0" />
          </font>
       </Button>
+      <TextField fx:id="grupaInput" layoutX="75.0" layoutY="414.0" prefHeight="25.0" prefWidth="250.0" style="-fx-border-color: #9A0CE8; -fx-background-color: #1D2030;" text="Grupa" />
    </children>
 </Pane>

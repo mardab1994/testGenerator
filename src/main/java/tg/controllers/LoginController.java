@@ -12,8 +12,9 @@ public class LoginController {
 	
 	private MainController mainController;
 //wstrzykniêcie textfieldow  
-	@FXML public TextField indeksInput=new TextField();
-	@FXML public TextField idTestInput=new TextField();
+	@FXML public TextField indeksInput = new TextField();
+	@FXML public TextField idTestInput = new TextField();
+	@FXML public TextField grupaInput = new TextField();
 	
 	@FXML
 	public void login2app() {
@@ -21,7 +22,9 @@ public class LoginController {
 		System.out.println("Logowanie do aplikacji...");
 		String indeks=indeksInput.getText();
 		String idTestu=idTestInput.getText();
-		System.out.println("indeks: "+indeks+"  idTestu: "+idTestu);
+		String grupaTestu=grupaInput.getText();
+		
+		System.out.println("indeks: "+indeks+"  idTestu: "+idTestu +"  grupa Testu "+grupaTestu);
 
 		
 		//inicjalizacja nowego okna
