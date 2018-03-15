@@ -22,7 +22,7 @@ public class Main extends Application{
 		Scene scene=new Scene(stackPane,400,600);
 		primaryStage.setScene(scene);
 		
-		primaryStage.setTitle("klick and pass...");
+		primaryStage.setTitle("click and pass...");
 		primaryStage.show();
 	}
 }
