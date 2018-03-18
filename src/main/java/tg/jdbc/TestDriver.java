@@ -6,29 +6,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import tg.sprawdzian.Sprawdzian;
+
 public class TestDriver {
+	
 	private Statement stmt = null;
 	private ResultSet rs = null;
 
 	private int liczbaPytan;
 	private int liczbaKolumnNaPytania;
 	private int liczbaOdpowiedzi;
-
-	public void funkcja(String idTestu) {
+	private Connection con=null;
+	
+	
+	public void pobierzDane_o_tescie(String idTestu) {
 		String zapytanie = "";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1522:xe", "hr", "hr");
+			//Connection 
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1522:xe", "hr", "mikulec32");
 			stmt = con.createStatement();
+			
 
-			// --------------POBRANIE LICZBY PYTAN ------------------------------------
+//--------- --------------POBRANIE LICZBY PYTAN ------------------------------------
 			zapytanie = "SELECT liczbaPytan FROM INFO_TESTU WHERE id=" + idTestu;
 			rs = stmt.executeQuery(zapytanie);
 			while (rs.next()) {
 				liczbaPytan = Integer.parseInt(rs.getString("liczbaPytan"));
 				System.out.println("liczba pytan w tescie to " + liczbaPytan);
 			}
-			// ---------------POBRANIE LICZBY MOZLIWYCH ODPOWIEDZI ---------------
+//---- ---------------POBRANIE LICZBY MOZLIWYCH ODPOWIEDZI ---------------
 			zapytanie = "SELECT liczbaOdpowiedzi FROM INFO_TESTU WHERE id=" + idTestu;
 			rs = stmt.executeQuery(zapytanie);
 			while (rs.next()) {
@@ -40,16 +47,37 @@ public class TestDriver {
 			rs = stmt.executeQuery(zapytanie);
 			while (rs.next()) {
 				liczbaKolumnNaPytania = Integer.parseInt(rs.getString("totalCol"))-4;
-				System.out.println("liczba KOLUMN na odpowiedzi to " + liczbaKolumnNaPytania);
+				System.out.println("liczba KOLUMN na pytania to " + liczbaKolumnNaPytania);
+			}
+				
 				if(liczbaKolumnNaPytania < liczbaPytan) {//trzeba dodac nowe kolumny na test
-					for(int i=liczbaKolumnNaPytania;i<=liczbaPytan;i++) {
+					for(int i=liczbaKolumnNaPytania; i<=liczbaPytan; i++) {
 						String nazwaKolumny="pyt";
-						nazwaKolumny+=i;
+						nazwaKolumny+=Integer.toString(i);
 						System.out.println(nazwaKolumny);
-						//komenda sql do utworzeni niezbednych kolumn alter table ...
+						zapytanie="ALTER TABLE SPRAWDZIAN add(" + nazwaKolumny + " VARCHAR2(6) DEFAULT NULL)";
+						
+						stmt = null;
+					    try {
+					        stmt = con.createStatement();
+					        stmt.executeUpdate(zapytanie);
+					    } catch (SQLException e) {
+					    	
+					    } //finally {
+					        //if (stmt != null) { stmt.close(); }
+					    //}
+						
 				}
 				}	
-			}
+				stmt = null;
+			    try {
+			        stmt = con.createStatement();
+			        stmt.executeUpdate("Commit");
+			    } catch (SQLException e) {
+			    	
+			    }
+				liczbaKolumnNaPytania=liczbaPytan;
+			//}
 		} catch (Exception ex) {
 			// obsluga bledow
 		} finally { // zwalnianie zasobow
@@ -78,5 +106,38 @@ public class TestDriver {
 	}
 	public int getLiczbaOdpowiedzi() {
 		return liczbaOdpowiedzi;
+	}
+	public int getliczbaKolumnNaPytania() {
+		return liczbaKolumnNaPytania;
+	}
+	public void closeConnection() {
+		try {
+			this.con.close();
+			System.out.println("Zamykam po³czenie z baza danych209221		");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void dodajDaneStudenta( ) {
+		String zapytanie="INSERT ALL INTO SPRAWDZIAN(idTestu, grupaTestu,indeksStudenta) VALUES (1,'F1A1','209221') SELECT * FROM dual";
+		stmt = null;
+	    try {
+	        stmt = con.createStatement();
+	        stmt.executeUpdate(zapytanie);
+	    } catch (SQLException e) {
+	    	
+	    }
+	}
+	//wysyla do bazy komende/zapytanie np update table instert...
+	public void sendQuery(String zapytanie) {
+		stmt = null;
+	    try {
+	        stmt = con.createStatement();
+	        stmt.executeUpdate(zapytanie);
+	    } catch (SQLException e) {
+	    	
+	    }
 	}
 }
