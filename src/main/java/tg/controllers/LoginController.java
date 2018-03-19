@@ -47,18 +47,56 @@ public class LoginController {
 		//-----------------------------KONIEC BAZY DANYCH ---------------------------
 		
 		//inicjalizacja nowego okna
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/answearScreen.fxml"));
-		Pane pane=null;
-		try{
-			pane=loader.load();
-		}catch(IOException e) {
-			e.printStackTrace();
+		if(sprawdzian.getLiczbaOdpowiedzi()==2) {
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/answearScreen.fxml"));
+			Pane pane=null;
+			try{
+				pane=loader.load();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			AnswearController answearController = loader.getController();
+			answearController.setTestAndDataBase(sprawdzian, testDriver);
+			answearController.setMainController(this);
+			mainController.setScreen(pane);//przekazanie nowego okna do mainControllera
+		}else if(sprawdzian.getLiczbaOdpowiedzi()==3) {
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/answearScreen3.fxml"));
+			Pane pane=null;
+			try{
+				pane=loader.load();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			AnswearController3 answearController3 = loader.getController();
+			answearController3.setTestAndDataBase(sprawdzian, testDriver);
+			answearController3.setMainController(this);
+			mainController.setScreen(pane);//przekazanie nowego okna do mainControllera
+		}else if(sprawdzian.getLiczbaOdpowiedzi()==4) {
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/answearScreen4.fxml"));
+			Pane pane=null;
+			try{
+				pane=loader.load();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			AnswearController4 answearController4 = loader.getController();
+			answearController4.setTestAndDataBase(sprawdzian, testDriver);
+			answearController4.setMainController(this);
+			mainController.setScreen(pane);//przekazanie nowego okna do mainControllera
+		}else if(sprawdzian.getLiczbaOdpowiedzi()==5) {
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/answearScreen5.fxml"));
+			Pane pane=null;
+			try{
+				pane=loader.load();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			AnswearController5 answearController5 = loader.getController();
+			answearController5.setTestAndDataBase(sprawdzian, testDriver);
+			answearController5.setMainController(this);
+			mainController.setScreen(pane);//przekazanie nowego okna do mainControllera
 		}
-		AnswearController answearController = loader.getController();
-		answearController.setTestAndDataBase(sprawdzian, testDriver);
-		answearController.setMainController(this);
 		
-		mainController.setScreen(pane);//przekazanie nowego okna do mainControllera
 		
 		
 	}

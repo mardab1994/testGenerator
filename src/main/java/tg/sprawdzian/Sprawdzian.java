@@ -83,8 +83,9 @@ public class Sprawdzian {
 			System.out.println("modyfikacja podpunktu B, odpowiedz to "+this.OdpowiedziStudenta.get(nrPytania).getB());
 
 		}else if(podpunkt=="C") {
-			System.out.println("modyfikacja podpunktu C");
 			this.OdpowiedziStudenta.get(nrPytania).setC(wartosc);
+			System.out.println("modyfikacja podpunktu C, odpowiedz to "+this.OdpowiedziStudenta.get(nrPytania).getC());
+
 		}else if(podpunkt=="D") {
 			System.out.println("modyfikacja podpunktu D");
 			this.OdpowiedziStudenta.get(nrPytania).setD(wartosc);
